@@ -152,9 +152,10 @@ On most Linux systems, you'll need to grant special access to the USB devices, s
 1. On the Linux host, install the latest official proprietary NVIDIA drivers.  In Ubuntu, you can do this in the **Software & Updates** app, in the **Additional Drivers** tab.  Reboot and make sure everything works okay.  I have the computer running in "discrete" mode (set in the BIOS).  Not sure if this is needed.  Also, I am logged in using X11 (Xwindows) in the Desktop.  Not sure how well Wayland will work, although it theoretically *should* be compatible.  (You can switch your desktop from Wayland to X11 in Ubuntu's account login screen.)  Other versions of Linux may have their own method of installing the drivers, so time to [Google that](https://www.google.com/search?q=nvidia+how+to+install+drivers+linux)!
 1. Install Podman [or Docker] and and other dependencies with this command (on distributions that support [apt](https://linuxize.com/post/how-to-use-apt-command/):
      
-    `sudo apt install -y podman fuse-overlayfs nvidia-container-runtime buildah`
+    `sudo apt install -y podman fuse-overlayfs nvidia-container-runtime buildah x11-xserver-utils`
 
-    (Alternately, you can `apt install -y docker` instead of podman.  But IMO Podman is better/safer.)
+    Alternately, you can `apt install -y docker` instead of podman, but IMO Podman is better/safer.
+    If your host uses an Arch-based Linux distribution, install `xorg-xhost` instead of `x11-xserver-utils`.
 1. If using Podman, ensure you have your system set up as described on the [Arch Wiki](https://wiki.archlinux.org/title/Podman#Rootless_Podman)
 1.  Move or `git clone` [this repository](https://github.com/fat-tire/resolve) (you'll want `Dockerfile`, `resolve.sh`, `build.sh`, `.gitignore`, `.dockerignore`, `env-set.sh`, this `README.md`, etc.) somewhere like `~/containers/resolve`, so let's just go with that for now.
 
