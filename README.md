@@ -87,7 +87,7 @@ Yes, there's lxd and lxc and snap and- y'know, let's narrow it down to two reall
 
 Docker is by far most popular, but requires a daemon with root access be running all the time.  Hmm.  This could have [security implications](https://mobile.twitter.com/blackmagic_news/status/1470936014646439937?s=21), and may unnecessarily use system resources even when no containers are running.
 
-RedHat has developed an alternative, mostly-Docker-compatible system called the Pod Manager tool, or [Podman](https://podman.io/).  One advantage of Podman is that containers can be run by a single user without ever requiring root.  When running Resolve, we don't ever need root access, so this is my favorite solution.
+RedHat has developed an alternative, mostly-Docker-compatible system called the Pod Manager tool, or [Podman](https://podman.io/).  One advantage of Podman is that containers can be run by a single user without ever requiring root. When running Resolve, we don't ever need root access, which is theoretically safer. Note that this method requires having kernel user namespaces enabled (which cannot be disabled on many modern distributions). If you use an Arch-based Linux distribution or Debian with a non-hardened kernel, user namespaces are likely enabled by default. If you do plan on keeping user namespaces enabled, keep in mind the privilege escalation security implications as discussed [here](https://security.stackexchange.com/a/209533).
 
 Both Podman and Docker are available in most Linux distributions and can be installed easily.  On Debian-derived Linux such as Ubuntu, Mint, and PopOS, this is accomplished via [apt](https://en.wikipedia.org/wiki/APT_(software)).
 
