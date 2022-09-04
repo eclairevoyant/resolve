@@ -150,24 +150,23 @@ On most Linux systems, you'll need to grant special access to the USB devices, s
 ## Installing, step-by-step
 
 1. On the Linux host, install the latest official proprietary NVIDIA drivers.  In Ubuntu, you can do this in the **Software & Updates** app, in the **Additional Drivers** tab.  Reboot and make sure everything works okay.  I have the computer running in "discrete" mode (set in the BIOS).  Not sure if this is needed.  Also, I am logged in using X11 (Xwindows) in the Desktop.  Not sure how well Wayland will work, although it theoretically *should* be compatible.  (You can switch your desktop from Wayland to X11 in Ubuntu's account login screen.)  Other versions of Linux may have their own method of installing the drivers, so time to [Google that](https://www.google.com/search?q=nvidia+how+to+install+drivers+linux)!
-
-2. Install Podman [or Docker] and and other dependencies with this command (on distributions that support [apt](https://linuxize.com/post/how-to-use-apt-command/):
+1. Install Podman [or Docker] and and other dependencies with this command (on distributions that support [apt](https://linuxize.com/post/how-to-use-apt-command/):
      
-    `sudo apt install -y podman fuse-overlayfs nvidia-container-runtime crun`
+    `sudo apt install -y podman fuse-overlayfs nvidia-container-runtime buildah`
 
     (Alternately, you can `apt install -y docker` instead of podman.  But IMO Podman is better/safer.)
- 
-3.  Move or `git clone` [this repository](https://github.com/fat-tire/resolve) (you'll want `Dockerfile`, `resolve.sh`, `build.sh`, `.gitignore`, `.dockerignore`, `env-set.sh`, this `README.md`, etc.) somewhere like `~/containers/resolve`, so let's just go with that for now.
+1. If using Podman, ensure you have your system set up as described on the [Arch Wiki](https://wiki.archlinux.org/title/Podman#Rootless_Podman)
+1.  Move or `git clone` [this repository](https://github.com/fat-tire/resolve) (you'll want `Dockerfile`, `resolve.sh`, `build.sh`, `.gitignore`, `.dockerignore`, `env-set.sh`, this `README.md`, etc.) somewhere like `~/containers/resolve`, so let's just go with that for now.
 
-4. Download the official DaVinci Resolve `.zip` file from [Blackmagic Design](https://www.blackmagicdesign.com), the makers of DaVinci Resolve.
+1. Download the official DaVinci Resolve `.zip` file from [Blackmagic Design](https://www.blackmagicdesign.com), the makers of DaVinci Resolve.
 
-5. Move that `.zip` file to `~/containers/resolve/`and rename it to be in this format:
+1. Move that `.zip` file to `~/containers/resolve/`and rename it to be in this format:
 
       **DaVinci_Resolve_Studio_17.4.2_Linux.zip**
 
      (You can leave out the **_Studio** part if you're using the free version.)
 
-6. Change directory (`cd`) into `~/containers/resolve` and build the resolve container image:
+1. Change directory (`cd`) into `~/containers/resolve` and build the resolve container image:
 
      `cd ~/containers/resolve`
 
@@ -175,13 +174,13 @@ On most Linux systems, you'll need to grant special access to the USB devices, s
 
      **NOTE:  Part of this building/installation process includes agreeing to certain terms and conditions from the makers of DaVinci Resolve [Studio].  Please be sure to review these terms and agree to them before using DaVince Resolve [Studio].  You will be asked to agree when running `./build.sh`.**
 
-7.  Now wait.  The **CentOS Stream** system should be downloaded, updated, dependencies added, the DaVinci Resolve.zip copied in there and everything hopefully will be installed.
+1.  Now wait.  The **CentOS Stream** system should be downloaded, updated, dependencies added, the DaVinci Resolve.zip copied in there and everything hopefully will be installed.
 
     Assuming no errors occur, you're (fingers-crossed) ready to run DaVinci Resolve [Studio] now.
     
     NOTE:  In the future, when NVIDIA releases newer drivers, you'll probably want to keep your CentOS container's drivers "in sync" with the one on the host by rebuilding the container.
 
-8.  To be sure the container's runtime is properly NVIDIA GPU-enabled, try this command:
+1.  To be sure the container's runtime is properly NVIDIA GPU-enabled, try this command:
     
     `./resolve.sh nvidia-smi`
     
@@ -197,7 +196,7 @@ On most Linux systems, you'll need to grant special access to the USB devices, s
     
     This should output an "info box".  If it doesn't, your problem is probably on the host.  If it does show the box, the problem is probably something about the CentOS container image.
 
-9.  Assuming you're good to go, try running Resolve!
+1.  Assuming you're good to go, try running Resolve!
 
     If you run `resolve.sh` as a regular user on the host with:
 
