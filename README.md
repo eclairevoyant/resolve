@@ -145,7 +145,9 @@ Will this work with other specialized editing/camera/etc hardware?  Not sure!
 
 ## First add a udev rules file
 
-On most Linux systems, you'll need to grant special access to the USB devices, so adding a `70-blackmagic-design.rules` [udev](https://www.freedesktop.org/software/systemd/man/udev.html) file on the host computer is a good idea.  An example file is provided in this repository.  Just copy `70-blackmagic-design.rules` to `/etc/udev/rules.d/` or wherever udev rule files should be put on your Linux distribution.
+If you don't plan on using a USB license dongle (i.e., if you're using the free version, or you use a registration code instead for Resolve Studio), or if you don't own any of Blackmagic Design's hardware for editing, you can skip this step.
+
+Otherwise, on most Linux systems, you'll need to grant special access to these USB devices, so adding a `70-blackmagic-design.rules` [udev](https://www.freedesktop.org/software/systemd/man/udev.html) file on the host computer is a good idea.  An example file is provided in this repository.  Just copy `70-blackmagic-design.rules` to `/etc/udev/rules.d/` or wherever udev rule files should be put on your Linux distribution.
 
 ## Installing, step-by-step
 
